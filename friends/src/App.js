@@ -1,23 +1,22 @@
-import React from 'react';
-import './App.css';
-import Login from './components/Login';
-import FriendsList from './components/FriendsList';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
-import PrivateRoute from './components/PrivateRoute';
+import React from "react";
+import "./App.css";
+import Login from "./components/Login";
+import FriendsList from "./components/FriendsList";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
     <Router>
-    <div className="App">
-      <header className="App-header">
-        <Route exact path="/" component={Login} />
-         
-        <Route path="/login" component={Login} />
-       
-          <PrivateRoute path="/protected" component={FriendsList} />
-            
-      </header>
-    </div>
+      <div className="App">
+        <header className="App-header">
+          <Switch>
+            <PrivateRoute path="/protected" component={FriendsList} />
+            <Route path="/login" component={Login} />
+            <Route component={Login} />
+          </Switch>
+        </header>
+      </div>
     </Router>
   );
 }
